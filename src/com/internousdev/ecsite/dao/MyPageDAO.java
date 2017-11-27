@@ -1,0 +1,70 @@
+package com.internousdev.ecsite.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.internousdev.ecsite.dto.MyPageDTO;
+import com.internousdev.ecsite.util.DBConnector;
+
+public class MyPageDAO {
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+
+	public ArrayList<MyPageDTO> getMyPageInfo(String userId, String userName) throws SQLException {
+		ArrayList<MyPageDTO> myPageDTO = new ArrayList<MyPageDTO>();
+		String sql = "select*from buy_item_info where user_id = ? and user_name = ?";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, userId);
+			preparedStatement.setString(2, userName);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()) {
+				MyPageDTO dto = new MyPageDTO();
+				dto.setUserName(resultSet.getString("user_name"));
+				dto.setItemName(resultSet.getString("item_name"));
+				dto.setTotalPrice(resultSet.getString("total_price"));
+				dto.setCount(resultSet.getString("count"));
+				dto.setPay(resultSet.getString("pay"));
+				dto.setInsert_date(resultSet.getString("insert_date"));
+				myPageDTO.add(dto);
+			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+
+		return myPageDTO;
+	}
+
+
+	public int HistoryDelete(String userId, String userName) throws SQLException {
+
+		String sql = "DELETE FROM buy_item_info where user_id  = ? AND user_name  = ?";
+
+		PreparedStatement preparedStatement;
+		int result =0;
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, userId);
+			preparedStatement.setString(2, userName);
+
+			result = preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+
+		return result;
+	}
+}
+

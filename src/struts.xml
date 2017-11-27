@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+ "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+ <struts>
+ <constant name="struts.devMode" value="true"/>
+
+<package name="com.internousdev.login.action" extends="struts-default">
+
+<!-- ////////////////////////////仮ID作成///////////////////////////// -->
+<!-- <action name="PreIdCreateAction" class="com.internousdev.ecsite.action.PreIdCreateAction" method="execute">
+<result name="success">home.jsp</result>
+</action>
+ -->
+
+
+<!--//////////////////////////////////// 検索機能///////////////////////////////////////// -->
+
+<action name="WordSearchAction" class="com.internousdev.ecsite.action.WordSearchAction" method="execute">
+<result name="success">wordSearchList.jsp</result>
+<result name="error">searchError.jsp</result>
+</action>
+
+<action name="BackWordSearchAction" class="com.internousdev.ecsite.action.WordSearchAction" method="execute">
+<result name="success">home.jsp</result>
+</action>
+
+<action name="CategorySearchAction" class="com.internousdev.ecsite.action.CategorySearchAction" method="execute">
+<result name="success">categorySearchList.jsp</result>
+</action>
+
+<action name="BackCategorySearchAction" class="com.internousdev.ecsite.action.BackCategorySearchAction" method="execute">
+<result name="success">home.jsp</result>
+</action>
+
+<action name="ItemDetailSearchAction" class="com.internousdev.ecsite.action.ItemDetailSearchAction" method="execute">
+<result name="success">itemDetail.jsp</result>
+<result name="error">searchError.jsp</result>
+</action>
+
+<action name="BackItemDetailSearchAction" class="com.internousdev.ecsite.action.ItemDetailSearchAction" method="execute">
+<result name="Word">wordSearchList.jsp</result>
+<result name="Category">CategorySearchList.jsp</result>
+<result name="error">home.jsp</result>
+</action>
+
+
+<!-- /////////////////////////////ログイン機能////////////////////////////////// -->
+<action name="GoLoginAction" class="com.internousdev.ecsite.action.GoLoginAction" method="execute">
+<result name="success">home.jsp</result>
+<result name="login">login.jsp</result>
+</action>
+<action name="LoginAction" class="com.internousdev.ecsite.action.LoginAction" method="execute">
+<result name="success">buyItemConfirm.jsp</result>
+<result name="home">home.jsp</result>
+<result name="mypage" type="chain">MyPageAction</result>
+<result name="error">login.jsp</result>
+</action>
+
+<action name="LogoutAction" class="com.internousdev.ecsite.action.LogoutAction" method="execute">
+<result name="success">home.jsp</result>
+</action>
+
+<!-- ///////////////////////////アカウント作成/////////////////////////////////// -->
+<action name="GoCreateUserAction" class="com.internousdev.ecsite.action.GoCreateUserAction" method="execute">
+<result name="success">createuser.jsp</result>
+</action>
+
+<action name="CreateUserAction" class="com.internousdev.ecsite.action.CreateUserAction" method="execute">
+<result name="success">createuserconfirm.jsp</result>
+<result name="error">createuser.jsp</result>
+</action>
+
+<action name="CreateUserComplateAction" class="com.internousdev.ecsite.action.CreateUserComplateAction" method="execute">
+<result name="success">createusercomplate.jsp</result>
+</action>
+
+<action name="BackCreateUserAction" class="com.internousdev.ecsite.action.BackCreateUserAction" method="execute">
+<result name="success">createuser.jsp</result>
+</action>
+
+<action name="BackLoginAction" class="com.internousdev.ecsite.action.BackLoginAction" method="execute">
+<result name="success">login.jsp</result>
+</action>
+
+<!-- /////////////////////////商品購入///////////////////////////////// -->
+<action name="BuyItemAction" class="com.internousdev.ecsite.action.BuyItemAction" method="execute">
+<result name="success">buyItemConfirm.jsp</result>
+<result name="error">login.jsp</result>
+</action>
+
+<action name="BuyItemConfirmAction" class="com.internousdev.ecsite.action.BuyItemConfirmAction" method="execute">
+<result name="success">buyItemComplate.jsp</result>
+</action>
+
+<!-- ////////////////////////ホーム画面へ///////////////////////// -->
+<action name="GoHomeAction" class="com.internousdev.ecsite.action.GoHomeAction" method="execute">
+	<result name="success">home.jsp</result>
+</action>
+
+<!-- ////////////////////////マイページ画面へ///////////////////////// -->
+<action name="GoMyPageAction" class="com.internousdev.ecsite.action.GoMyPageAction" method="execute">
+	<result name="success" type="chain">MyPageAction</result>
+	<result name="login">login.jsp</result>
+</action>
+
+<action name="MyPageAction" class="com.internousdev.ecsite.action.MyPageAction" method="execute">
+	<result name="success">mypage.jsp</result>
+	<result name="error">login.jsp</result>
+</action>
+</package>
+ </struts>
